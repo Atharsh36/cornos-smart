@@ -1,0 +1,6 @@
+{
+  "network": "cronosTestnet",
+  "chainId": 338,
+  "escrow": "0x12a09612eFc1538406f23B78E89a1dB094dc4Ac6",
+  "vault": "0xaF194729b6ad0Fe1A7238416fe9db3Ce6764B410"
+}
