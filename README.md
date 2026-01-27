@@ -1,182 +1,171 @@
-# CronoSmart - Decentralized E-commerce MVP
+# 🚀 CronoSmart
 
-A complete decentralized marketplace built on Cronos testnet with smart contract escrow, Web3 authentication, and modern UI.
+CronoSmart is a decentralized e-commerce marketplace built on the **Cronos Network** that combines a familiar shopping experience with **smart contract–based escrow security**.  
+It works like a normal online marketplace, but buyer funds are locked safely on-chain and released only after delivery is confirmed.
 
-## 🚀 Quick Start Guide
+---
 
-### Prerequisites
-- Node.js (v18+)
-- MongoDB running locally
-- MetaMask wallet with Cronos testnet configured
+## 🧠 Why CronoSmart?
 
-### 1. Backend Setup
+Traditional e-commerce platforms rely on centralized trust:
+- Buyers trust the platform
+- Sellers wait for payouts
+- Disputes are handled manually
+
+CronoSmart removes this dependency by using **Vault + Escrow smart contracts**, ensuring:
+- Buyer funds are protected
+- Sellers are paid only after delivery
+- Transactions are transparent and verifiable on-chain
+
+---
+
+## 🔥 Use Cases
+
+### 🛍️ Secure Online Shopping
+Buy products safely with escrow-protected payments.
+
+### 🌍 Cross-Border Commerce
+Crypto payments remove geographical and banking barriers.
+
+### 💼 High-Value Transactions
+Ideal for electronics, luxury items, or B2B commerce.
+
+### ⚖️ Dispute-Prone Marketplaces
+Escrow ensures neither buyer nor seller can be cheated.
+
+### 🤖 AI-Enhanced Commerce (Optional)
+AI Rails assist with product discovery, seller trust scoring, and dispute analysis.  
+Premium AI tools can be unlocked using **x402 pay-per-use payments**.
+
+---
+
+## 🏗️ Architecture Overview
+
+### 🔐 Smart Contracts (Cronos Testnet)
+- **Vault Contract** – Manages user deposits (CRO / tokens)
+- **Escrow Contract** – Locks and releases payments based on order lifecycle
+
+### 🧠 Backend
+- Node.js + Express
+- MongoDB for off-chain data (products, orders, users)
+- REST APIs for marketplace operations
+
+### 🎨 Frontend
+- React + Vite + TypeScript
+- Tailwind CSS
+- Wagmi + Viem for Web3 interactions
+- MetaMask wallet integration
+
+---
+
+## 🔁 Order Flow
+
+1. Buyer deposits CRO into Vault  
+2. Buyer places an order  
+3. Funds move from Vault → Escrow  
+4. Seller ships product  
+5. Buyer confirms delivery  
+6. Escrow releases funds to seller  
+
+---
+
+## 🔗 Smart Contract Details (Cronos Testnet)
+
+- **Escrow Contract**  
+  `0x12a09612eFc1538406f23B78E89a1dB094dc4Ac6`
+
+- **Vault Contract**  
+  `0xaF194729b6ad0Fe1A7238416fe9db3Ce6764B410`
+
+- **Network**: Cronos Testnet  
+- **Chain ID**: 338  
+- **RPC**: https://evm-t3.cronos.org/
+
+---
+
+## 🧑‍💻 How to Run the Project Locally
+
+### 📦 Prerequisites
+- Node.js v18+
+- npm or yarn
+- MetaMask browser extension
+- Cronos Testnet added to MetaMask
+
+---
+
+### 🔹 Backend Setup
+
 ```bash
 cd backend
 npm install
-npm run seed    # Add demo products to database
-npm run dev     # Start backend server on port 8080
-```
+npm run dev
 
-### 2. Frontend Setup
-```bash
+Backend runs on:
+
+http://localhost:8080
+
+
+Make sure MongoDB is running and .env is configured.
+
+### Frontend Setup
 cd frontend
 npm install
-npm run dev     # Start frontend on port 5173
-```
+npm run dev
 
-### 3. Access the Application
-- Frontend: http://localhost:5173
-- Backend API: http://localhost:8080
 
-## 🎯 MVP Features Implemented
+Frontend runs on:
 
-### ✅ Smart Contracts (Deployed on Cronos Testnet)
-- **Escrow Contract**: `0x12a09612eFc1538406f23B78E89a1dB094dc4Ac6`
-- **Vault Contract**: `0xaF194729b6ad0Fe1A7238416fe9db3Ce6764B410`
-- Secure payment escrow with dispute resolution
-- Multi-token support (CRO + ERC20)
+http://localhost:5173
 
-### ✅ Backend API (Complete)
-- **Products**: CRUD with search, pagination, filtering
-- **Orders**: Full lifecycle management (CREATED → COMPLETED)
-- **Authentication**: Web3 wallet signature + JWT
-- **Database**: MongoDB with proper models
-- **Blockchain Integration**: Contract reading service
+🔹 Build for Production
+npm run build
 
-### ✅ Frontend (Fully Functional)
-- **Wallet Connection**: MetaMask integration with Wagmi
-- **Product Marketplace**: Browse, search, filter products
-- **Product Details**: Complete product pages with buy functionality
-- **Smart Contract Integration**: Direct escrow funding from UI
-- **Order Tracking**: Real-time order status with progress indicators
-- **Responsive Design**: Modern UI with Tailwind CSS
 
-## 🛒 How to Use (Complete Flow)
+Production build output:
 
-### 1. Connect Wallet
-- Click "Connect Wallet" in navbar
-- Approve MetaMask connection
-- Switch to Cronos testnet if needed
+dist/
 
-### 2. Browse Products
-- Visit marketplace page
-- Use search and filters
-- View product details
+👤 How to Use CronoSmart
+🛒 Buyer Flow
 
-### 3. Buy Products (Escrow Flow)
-- Click product → "Buy Now"
-- Enter shipping address
-- Confirm transaction in MetaMask
-- Funds locked in escrow contract
-- Order created in database
+Connect MetaMask (Cronos Testnet)
 
-### 4. Track Orders
-- Visit "My Orders" page
-- See order progress: CREATED → FUNDED → SHIPPED → DELIVERED → COMPLETED
-- View transaction hashes on Cronos explorer
+Deposit CRO into Vault
 
-## 🔧 Technical Architecture
+Browse the marketplace
 
-### Smart Contracts
-```
-Buyer → Escrow Contract → Seller
-         ↓
-    Funds locked until delivery confirmed
-```
+Buy a product (escrow-protected)
 
-### Backend Stack
-- **Node.js + TypeScript + Express**
-- **MongoDB** for product/order data
-- **JWT** for authentication
-- **Ethers.js** for blockchain integration
+Confirm delivery to release payment
 
-### Frontend Stack
-- **React 19 + TypeScript + Vite**
-- **Wagmi + Viem** for Web3 integration
-- **TanStack Query** for state management
-- **Tailwind CSS** for styling
+🧑‍💼 Seller Flow
 
-## 📊 Database Collections
+Connect wallet
 
-### Products
-```javascript
-{
-  sellerAddress: "0x...",
-  name: "Product Name",
-  price: 99.99,
-  stock: 10,
-  category: "Electronics",
-  // ... more fields
-}
-```
+List products
 
-### Orders
-```javascript
-{
-  orderId: "0x...",
-  buyerAddress: "0x...",
-  sellerAddress: "0x...",
-  status: "FUNDED",
-  txHash: "0x...",
-  // ... more fields
-}
-```
+Ship orders
 
-## 🌐 Environment Variables
+Receive payment after delivery confirmation
 
-### Backend (.env)
-```
-PORT=8080
-MONGO_URI=mongodb://127.0.0.1:27017/cronomart
-JWT_SECRET=your-secret-key
-CRONOS_RPC=https://evm-t3.cronos.org
-```
+🧠 AI Rails (Optional)
 
-### Frontend (.env)
-```
-VITE_API_URL=http://localhost:8080
-VITE_ESCROW_CONTRACT_ADDRESS=0x12a09612eFc1538406f23B78E89a1dB094dc4Ac6
-```
+AI Rails enhance the platform by:
 
-## 🎮 Demo Data
-The seed script adds 4 demo products:
-- Wireless Gaming Headset (89.99 CRO)
-- Mechanical Keyboard (129.99 CRO)
-- Smart Watch Pro (299.99 CRO)
-- Bluetooth Speaker (79.99 CRO)
+Recommending products
 
-## 🔍 Testing the Escrow
+Generating product summaries
 
-1. **Buy a product** → Funds locked in escrow
-2. **Check Cronos explorer** → Verify transaction
-3. **View order status** → Track progress
-4. **Seller ships** → Status updates to SHIPPED
-5. **Buyer confirms** → Funds released to seller
+Evaluating seller trust
 
-## 🚨 Troubleshooting
+Assisting in dispute resolution
 
-### Backend Issues
-- Ensure MongoDB is running
-- Check if port 8080 is available
-- Verify environment variables
+Some AI features are protected using x402 pay-per-action payments.
 
-### Frontend Issues
-- Ensure backend is running on port 8080
-- Check MetaMask is connected to Cronos testnet
-- Clear browser cache if needed
+ Security Notes
 
-### Smart Contract Issues
-- Ensure you have CRO for gas fees
-- Check contract addresses are correct
-- Verify network is Cronos testnet (Chain ID: 338)
+Funds are never held by a centralized party
 
-## 🎯 What's Working Now
+All payments are managed by smart contracts
 
-✅ **Complete product marketplace**
-✅ **Wallet-based authentication**
-✅ **Smart contract escrow payments**
-✅ **Order tracking and management**
-✅ **Responsive modern UI**
-✅ **Real-time transaction status**
-
-This is a **fully functional MVP** ready for testing and demonstration!
+Backend stores metadata only, not user funds
