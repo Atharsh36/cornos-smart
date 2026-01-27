@@ -15,6 +15,7 @@ export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isAuthenticating, setIsAuthenticating] = useState(false);
     const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
+    const [hasAttemptedAuth, setHasAttemptedAuth] = useState(false);
     const { vaultBalance, refreshBalance } = useVault();
 
     const formatAddress = (addr: string) => `${addr.slice(0, 6)}...${addr.slice(-4)}`;
@@ -84,8 +85,9 @@ export default function Navbar() {
 
     // Auto-authenticate when wallet connects (but don't force it)
     useEffect(() => {
-        // Only auto-authenticate if user hasn't rejected before
-        if (isConnected && address && !tokenManager.getToken() && !localStorage.getItem('auth_rejected')) {
+        // Only auto-authenticate if user hasn't rejected before and hasn't attempted yet
+        if (isConnected && address && !tokenManager.getToken() && !localStorage.getItem('auth_rejected') && !hasAttemptedAuth && !isAuthenticating) {
+            setHasAttemptedAuth(true);
             // Add a small delay to let wallet connection settle
             setTimeout(() => {
                 handleAuthenticate();
@@ -95,7 +97,14 @@ export default function Navbar() {
         if (isConnected && address) {
             refreshBalance();
         }
-    }, [isConnected, address, refreshBalance]);
+    }, [isConnected, address, hasAttemptedAuth, isAuthenticating]);
+
+    // Reset auth attempt when wallet disconnects
+    useEffect(() => {
+        if (!isConnected) {
+            setHasAttemptedAuth(false);
+        }
+    }, [isConnected]);
 
     return (
         <header className="sticky top-0 z-50 bg-[#131921] text-white shadow-lg">
