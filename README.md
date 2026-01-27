@@ -1,59 +1,128 @@
 # 🚀 CronoSmart
 
-CronoSmart is a decentralized e-commerce marketplace built on the **Cronos Network** that brings smart-contract security to everyday online shopping.  
-Instead of trusting a centralized platform, payments are locked in **escrow contracts** and released only after delivery is confirmed.
+CronoSmart is a decentralized e-commerce marketplace built on the **Cronos Network** that brings trustless, smart-contract–based security to online shopping.  
+It works like a traditional e-commerce platform, but instead of trusting a centralized authority, buyer funds are locked safely in **escrow smart contracts** and released only after delivery is confirmed.
 
 ---
 
-## ✨ What Makes CronoSmart Different?
+## 🧠 Problem Statement
 
-- Buyers deposit CRO/tokens into a **Vault**
-- Purchases move funds from **Vault → Escrow**
-- Sellers receive payment **only after delivery**
-- Disputes can be handled transparently on-chain
-- Optional AI tools enhance trust and decision-making
+Traditional e-commerce platforms rely heavily on centralized trust:
+- Buyers must trust the platform to handle payments fairly
+- Sellers face delayed payouts and chargebacks
+- Disputes are handled manually and often unfairly
+- Cross-border payments are slow and expensive
 
----
-
-## 🔁 How It Works
-
-1. Buyer connects MetaMask (Cronos Testnet)
-2. Buyer deposits funds into the Vault
-3. Buyer places an order
-4. Escrow locks payment securely
-5. Seller ships the product
-6. Buyer confirms delivery
-7. Escrow releases funds to seller
+These issues create friction, especially in high-value and international transactions.
 
 ---
 
-## 🏗️ Tech Stack
+## 💡 Solution: CronoSmart
 
-**Smart Contracts**
-- Vault Contract – manages deposits
-- Escrow Contract – locks and releases payments
+CronoSmart solves these problems using **blockchain escrow + vault-based payments**:
+- Buyer funds are protected by smart contracts
+- Sellers receive guaranteed payment after delivery
+- No centralized custody of funds
+- Fully transparent and verifiable on-chain transactions
 
-**Backend**
-- Node.js, Express, MongoDB
-- REST APIs for products, orders, and disputes
-
-**Frontend**
-- React + Vite + TypeScript
-- Tailwind CSS
-- Wagmi + Viem for Web3 integration
+Trust is enforced by **code**, not intermediaries.
 
 ---
 
-## 🧑‍💻 Run Locally
+## 🔥 Key Features
 
-### Backend
+- 🏦 **Vault-Based Deposits**  
+  Users deposit CRO or supported tokens into a Vault before shopping.
+
+- 🔐 **Escrow-Protected Payments**  
+  Funds are locked in escrow and released only after delivery confirmation.
+
+- 🛒 **Marketplace Experience**  
+  Familiar product browsing, checkout, and order tracking.
+
+- ⚖️ **Dispute Protection**  
+  Funds remain safe during disputes until resolution.
+
+- 🤖 **AI Rails (Optional)**  
+  AI tools assist with product recommendations, seller trust scoring, and dispute summaries.
+
+- 💸 **x402 Pay-Per-Use AI Tools**  
+  Premium AI services can be unlocked using micro-payments.
+
+---
+
+## 🏗️ System Architecture
+
+### 🔗 Smart Contracts (Cronos Testnet)
+
+- **Vault Contract**  
+  Handles user deposits and balances.
+
+- **Escrow Contract**  
+  Locks payments and releases them based on order lifecycle events.
+
+### 🧠 Backend
+
+- Node.js + Express  
+- MongoDB for off-chain data:
+  - Products
+  - Orders
+  - Users
+  - Disputes
+- REST APIs for marketplace operations and AI services.
+
+### 🎨 Frontend
+
+- React + Vite + TypeScript  
+- Tailwind CSS for UI styling  
+- Wagmi + Viem for Web3 integration  
+- MetaMask wallet connection.
+
+---
+
+## 🔁 Order Lifecycle
+
+1. Buyer deposits CRO into the Vault  
+2. Buyer places an order  
+3. Payment moves from Vault → Escrow  
+4. Seller ships the product  
+5. Buyer confirms delivery  
+6. Escrow releases payment to seller  
+
+Order status progression:
+
+---
+
+## 🔗 Smart Contract Details (Cronos Testnet)
+
+- **Escrow Contract**  
+  `0x12a09612eFc1538406f23B78E89a1dB094dc4Ac6`
+
+- **Vault Contract**  
+  `0xaF194729b6ad0Fe1A7238416fe9db3Ce6764B410`
+
+- **Network**: Cronos Testnet  
+- **Chain ID**: 338  
+- **RPC**: https://evm-t3.cronos.org/
+
+---
+
+## 🧑‍💻 How to Run CronoSmart Locally
+
+### 📦 Prerequisites
+
+- Node.js v18 or higher  
+- npm or yarn  
+- MetaMask browser extension  
+- Cronos Testnet added to MetaMask  
+
+---
+
+## 🧠 Backend Setup
+
 ```bash
 cd backend
 npm install
-npm run 
-
-## Frontend Setup
-```bash
-cd frontend
-npm install
 npm run dev
+
+
