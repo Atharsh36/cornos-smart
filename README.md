@@ -1,161 +1,186 @@
-# 🚀 CronoSmart
+# 🚀 StellarBridge Pay
 
-CronoSmart is a decentralized e-commerce marketplace built on the Cronos Network.  
-It combines a familiar online shopping experience with smart-contract escrow security, ensuring that buyer funds are protected and released to sellers only after delivery confirmation.
-
-Unlike traditional marketplaces, CronoSmart removes centralized trust and replaces it with transparent, on-chain logic enforced by smart contracts.
+StellarBridge Pay is a crypto-to-UPI payment bridge powered by the Stellar blockchain that enables users to pay anywhere using XLM, even when merchants only accept UPI.
 
 ---
 
-## 🧠 Problem
+## 📌 Project Overview
 
-Traditional e-commerce platforms rely on centralized trust:
-- Buyers trust the platform to handle payments
-- Sellers wait for payouts and face chargebacks
-- Disputes are slow and manually handled
-- Cross-border payments are expensive and delayed
+StellarBridge Pay is a Web3 FinTech payments infrastructure project that bridges blockchain payments (Stellar / XLM) with real-world payment rails (UPI).
+
+Pay with crypto where crypto isn’t accepted.
+
+---
+
+## ❗ Problem Statement
+
+Despite growing crypto adoption, real-world usage remains limited.
+
+- Local merchants do not accept crypto
+- UPI dominates everyday payments in India
+- Users must convert → withdraw → transfer → pay
+- This process is slow, costly, and inconvenient
+
+Crypto is not usable for daily payments.
 
 ---
 
 ## 💡 Solution
 
-CronoSmart solves these problems using Vault and Escrow smart contracts:
-- Buyers deposit funds into a Vault
-- Payments are locked in Escrow during purchase
-- Sellers receive funds only after delivery confirmation
-- All transactions are verifiable on-chain
+StellarBridge Pay introduces a merchant-proxy payment model:
 
-Trust is enforced by code, not intermediaries.
+- Users pay in XLM
+- Merchants pay in UPI
+- A smart-contract escrow ensures trustless settlement
 
----
-
-## 🌟 Key Features
-
-- Vault-based deposits using CRO or supported tokens
-- Escrow-protected checkout flow
-- Transparent order lifecycle tracking
-- Buyer and seller protection
-- Dispute-safe payment handling
-- Optional AI-powered trust and recommendation tools
-- x402 pay-per-action support for premium AI services
+This makes crypto usable anywhere UPI exists.
 
 ---
 
-## 🏗️ Architecture Overview
+## 🔁 How It Works
 
-Smart Contracts:
-- Vault Contract: manages user deposits and balances
-- Escrow Contract: locks and releases payments based on order status
+1. User signs up and a real Stellar wallet is automatically created
+2. User scans a UPI QR code and enters the payment amount
+3. Payment request is sent to a merchant
+4. XLM is locked in a Soroban escrow smart contract
+5. Merchant pays the amount via UPI
+6. Merchant confirms payment
+7. Smart contract releases XLM to the merchant
 
-Backend:
-- Node.js with Express
-- MongoDB for off-chain data storage
-- REST APIs for products, orders, disputes, and AI services
+Secure. Trustless. Blockchain-backed.
+
+---
+
+## 👥 User Roles
+
+User:
+- Holds XLM
+- Wants to pay in the real world
+- Sends payment requests
+
+Merchant:
+- Has UPI access
+- Pays real-world bills
+- Receives XLM as settlement
+
+Merchants act as crypto-to-fiat bridges.
+
+---
+
+## 🔐 Smart Contract (Soroban Escrow)
+
+The Soroban escrow contract:
+- Locks XLM from the user
+- Releases XLM only after merchant confirmation
+- Prevents fraud on both sides
+- Supports refunds if payment fails
+
+---
+
+## ⭐ Why Stellar?
+
+Stellar is optimized for payments.
+
+We use Stellar because it provides:
+- Fast settlement
+- Extremely low transaction fees
+- Easy wallet creation
+- Soroban smart contracts for escrow
+
+---
+
+## 🛠️ Tech Stack
 
 Frontend:
-- React with Vite and TypeScript
-- Tailwind CSS for UI styling
-- Wagmi and Viem for Web3 interactions
-- MetaMask wallet integration
+- Next.js
+- Tailwind CSS
+- QR Scanner
+
+Backend:
+- Node.js
+- Express.js
+- PostgreSQL
+- Prisma ORM
+- Stellar SDK
+
+Blockchain:
+- Stellar Testnet
+- Soroban Smart Contracts (Rust)
 
 ---
 
-## 🔁 Order Lifecycle
+## 🗄️ Database Structure
 
-1. Buyer deposits CRO into the Vault
-2. Buyer places an order
-3. Funds move from Vault to Escrow
-4. Seller ships the product
-5. Buyer confirms delivery
-6. Escrow releases funds to the seller
+Users Table:
+- email
+- role (USER / MERCHANT)
+- stellar_public_key
+- stellar_secret_key_encrypted
+- created_at
 
-Order status progression:
-CREATED → FUNDED → SHIPPED → DELIVERED → COMPLETED
+Payment Requests Table:
+- user_id
+- merchant_id
+- upi_id
+- amount_in_inr
+- amount_in_xlm
+- status
+- stellar_tx_hash
+- created_at
 
 ---
 
-## ▶️ How to Run CronoSmart Locally
+## ⚙️ Installation
 
-Clone the repository:
-git clone https://github.com/<your-username>/cronosmart.git
-cd cronosmart
+git clone https://github.com/your-username/stellarbridge-pay.git
+cd stellarbridge-pay
 
-Run backend:
+Backend setup:
 cd backend
 npm install
-npm run dev
 
-Backend runs at:
-http://localhost:8080
-
-Run frontend (open a new terminal):
+Frontend setup:
 cd frontend
 npm install
+
+---
+
+## 🔐 Environment Variables
+
+DATABASE_URL=
+ENCRYPTION_SECRET=
+STELLAR_NETWORK=testnet
+
+---
+
+## ▶️ Running the Project
+
+Start backend:
 npm run dev
 
-Frontend runs at:
-http://localhost:5173
-
-Build frontend for production (optional):
-cd frontend
-npm run build
-
-Production build output:
-dist/
+Start frontend:
+npm run dev
 
 ---
 
-## 🧭 How to Use CronoSmart
+## 🧪 Demo Notes
 
-Buyer Flow:
-- Connect MetaMask wallet (Cronos Testnet)
-- Deposit CRO into the Vault
-- Browse products in the marketplace
-- Purchase a product (payment locked in escrow)
-- Track order status
-- Confirm delivery to release payment
-
-Seller Flow:
-- Connect wallet
-- List products with price and details
-- Receive orders
-- Ship products
-- Receive payment after buyer confirmation
+- Uses Stellar Testnet
+- Wallets are funded via Friendbot
+- UPI confirmation is manual for MVP scope
+- Focus is on real blockchain interaction
 
 ---
 
-## 🤖 AI Rails (Optional)
+## 🏷️ Project Category
 
-AI Rails enhance the marketplace experience by:
-- Recommending suitable products
-- Generating quick product summaries
-- Evaluating seller trust scores
-- Assisting during dispute resolution
-
-Some AI features are unlocked using x402 pay-per-action payments.
+- Crypto-to-Fiat Payment Bridge
+- Web3 Payments Infrastructure
+- Smart-Contract Escrow System
+- Financial Inclusion Tool
 
 ---
 
-## 🔐 Security Considerations
+## 📜 License
 
-- No centralized custody of user funds
-- All payments handled by smart contracts
-- Backend stores metadata only (never private keys or funds)
-- Fully transparent and verifiable transaction flow
-
----
-
-## 🔗 Smart Contracts (Cronos Testnet)
-
-Escrow Contract:
-0x12a09612eFc1538406f23B78E89a1dB094dc4Ac6
-
-Vault Contract:
-0xaF194729b6ad0Fe1A7238416fe9db3Ce6764B410
-
-Network: Cronos Testnet  
-Chain ID: 338  
-RPC: https://evm-t3.cronos.org/
-
----
-
+MIT License
